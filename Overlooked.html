@@ -20,16 +20,16 @@
 <meta name="if:Search and description in sidebar" content="1"/>
 <meta name="image:Background" content=""/>
 <meta name="image:Masthead" content=""/>
+<meta name="image:Sidebar" content=""/>
 <script type="text/javascript">
-function MM_swapImgRestore() { //v3.0
-  var i,x,a=document.MM_sr; for(i=0;a&&i<a.length&&(x=a[i])&&x.oSrc;i++) x.src=x.oSrc;
-}
 function MM_preloadImages() { //v3.0
   var d=document; if(d.images){ if(!d.MM_p) d.MM_p=new Array();
     var i,j=d.MM_p.length,a=MM_preloadImages.arguments; for(i=0; i<a.length; i++)
     if (a[i].indexOf("#")!=0){ d.MM_p[j]=new Image; d.MM_p[j++].src=a[i];}}
 }
-
+function MM_swapImgRestore() { //v3.0
+  var i,x,a=document.MM_sr; for(i=0;a&&i<a.length&&(x=a[i])&&x.oSrc;i++) x.src=x.oSrc;
+}
 function MM_findObj(n, d) { //v4.01
   var p,i,x;  if(!d) d=document; if((p=n.indexOf("?"))>0&&parent.frames.length) {
     d=parent.frames[n.substring(p+1)].document; n=n.substring(0,p);}
@@ -80,7 +80,18 @@ nav li {
 iframe, img, embed, object, video {
 	max-width: 100%;
 	min-width: 0px;
-}
+	width: auto;
+	height: auto;
+	}
+#NoteCount{
+	width: 20px;
+	height: 20px;
+	}
+#button{
+	width: 20px;
+	height: 20px;
+	}
+	
 /*Masthead*/
 #masthead {
     background: {color:Masthead background} url('{image:Masthead}');
@@ -100,24 +111,39 @@ iframe, img, embed, object, video {
 
 /*Sidebar*/
 #sidebar {
-    float: left;
-    margin: 0 5%;
-    width: 20%;
+	background: {color:Accent3} url('{image:Sidebar}') repeat;
+	margin-top: 0px;
+	margin-right: 10px;
+	margin-bottom: 10px;
+	margin-left: 10px;
+	-webkit-box-shadow: 5px 5px 1px 1px #1F1716;
+	box-shadow: 5px 5px 1px 1px #1F1716;
+	float: left;
+	width: 20%;
+	padding-top: 10px;
+	padding-right: 10px;
+	padding-bottom: 10px;
+	padding-left: 10px;
+	border-radius: 5px;
 }
 .item {
-    margin-bottom: 15%;
-    background: #fff;
-    padding: 1% 5%;
+	margin-bottom: 15%;
+	background-color: #FFFFFF;
+	padding-top: 1%;
+	padding-right: 5%;
+	padding-left: 5%;
+	padding-bottom: 5%;
 }
 /*Content area*/
 #content {
 	margin-right: 5%;
-	width: 45%;
-	float: right;
+	width: 60%;
+	float: none;
+	margin-left: 30%;
 }
 {block:IfHideSidebar}
 #content {
-    width: 70%;
+    width: 90%;
 }
 #sidebar {
     display: none;
@@ -212,11 +238,12 @@ blockquote {
 }
 /*Sidebar items*/
 .item form input {
-    border: none;
-    border-bottom: 1px solid #d1d1d1;
-    padding: 2% 1%;
-    width: 96%;
-    margin-bottom: 2%;
+	padding-top: 1px;
+	padding-left: 1px;
+	padding-right: 1px;
+	padding-bottom: 1px;
+	width: 80%;
+	height: 25px;
 }
 #portrait {
 	display: block;
@@ -251,7 +278,8 @@ blockquote {
 }
 /*Common styles*/
 #content article, .item, #masthead, #pagination a {
-    box-shadow: 0px 0px 9px 0px rgba(0, 0, 0, 0.33);
+	box-shadow: 0px 0px 9px 0px rgba(0, 0, 0, 0.33);
+	float: none;
 }
 blockquote, footer {
     box-shadow: 0px 1px 6px 1px rgba(0, 0, 0, 0.11) inset;
@@ -263,7 +291,7 @@ blockquote, footer {
 </style>
 </head>
 
-<body onLoad="MM_preloadImages('../../../Dropbox/Templates/Tumblr/Overlooked/Images/Overlooked Buttons/OverlookedHeartR.png')">
+<body onLoad="MM_preloadImages('Images/Overlooked Buttons/OverlookedHeartR.png','Images/Overlooked Buttons/OverlookedSearchR.png')">
 <header id="masthead">
     <h1><a href="/" title="{lang:Home}">{Title}</a></h1>
     <nav>
@@ -284,16 +312,15 @@ blockquote, footer {
 </header>
 <aside id="sidebar">
     {block:IfSearchAndDescriptionInSidebar}
-        <div class="item">
+  <div class="item">
 <div id="portrait"><img src="{PortraitURL-128}"/></div>
 {block:Description}
 <h2>{lang:About Me}</h2>
         <p>{Description}</p>
         {block:Description}
-        
-        <form action="/search" method="get">
-            <input type="text" name="q" value="{SearchQuery}" placeholder="{lang:Search}"/>
-        </form>
+  <form action="/search" method="get">
+    <input type="text" name="q" value="{SearchQuery}" placeholder="{lang:Search}"/><input type="image" onMouseOut="MM_swapImgRestore()" onMouseOver="MM_swapImage('button','','http://static.tumblr.com/hvaouri/HLQmzuc0p/overlookedsearchr.png',1)" src="http://static.tumblr.com/hvaouri/u4imzubup/overlookedsearch.png" id="button" />							
+  </form>
   </div>
     {/block:IfSearchAndDescriptionInSidebar}
 
@@ -366,7 +393,7 @@ blockquote, footer {
          {block:Title}<h1 class="title"><a href="{Permalink}">{Title}</a></h1>{/block:Title}
 <ul>
              {block:Lines}<li class="{Alt}"><p>{block:Label}<span class="label">{Label}</span>{/block:Label} {Line} </p></li>{/block:Lines}
-            </ul>
+</ul>
         {/block:Chat}
 
         {block:Audio}
@@ -396,7 +423,7 @@ blockquote, footer {
             <ul class="index">
                 <li><a href="{Permalink}"> <time datetime="{Year}-{MonthNumberWithZero}-{DayOfMonthWithZero}">{DayOfMonth} {Month} {Year}</time> </a></li>
 
-                {block:NoteCount}<li><a class="notecount" href="../../../Dropbox/Templates/Tumblr/{Permalink}#notes">{NoteCountWithLabel}</a></li>{/block:NoteCount}
+                {block:NoteCount}<li><a href="../../../Dropbox/Templates/Tumblr/{Permalink}#notes" onMouseOut="MM_swapImgRestore()" onMouseOver="MM_swapImage('NoteCount','','Images/Overlooked Buttons/OverlookedHeartR.png',1)"><img id="NoteCount" src="Images/Overlooked Buttons/OverlookedHeart.png" alt=""></a><a class="notecount" href="../../../Dropbox/Templates/Tumblr/{Permalink}#notes">{NoteCount}</a></li>{/block:NoteCount}
                 
                 {block:ContentSource}
                 <li><a href="{SourceURL}">{lang:Source}:{block:NoSourceLogo}{SourceTitle}{/block:NoSourceLogo}
@@ -412,8 +439,7 @@ blockquote, footer {
             {/block:HasTags}
             
             {block:PostNotes}
-            <div id="notes">
-            <a href="#" onMouseOut="MM_swapImgRestore()" onMouseOver="MM_swapImage('Notes','','../../../Dropbox/Templates/Tumblr/Overlooked/Images/Overlooked Buttons/OverlookedHeartR.png',1)"><img id="Notes" src="../../../Dropbox/Templates/Tumblr/Overlooked/Images/Overlooked Buttons/OverlookedHeart.png" alt="Notes"></a>{PostNotes} </div>
+            <div id="notes">{PostNotes} </div>
             {/block:PostNotes} 
             {/block:PermalinkPage} 
         </footer>
